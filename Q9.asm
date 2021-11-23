@@ -1,11 +1,12 @@
 .model small
 .data
-InputString DB 'THis iS A TEsT MESsaGE'
+InputString DB 'tGis iS A TEsT MESsaGE','$'
 ResultString DB 23 DUP('$')
 .code 
 main proc far
     mov ax,@data
     mov ds,ax
+    inc InputString[1]
     mov cx,22
     mov bx,0
     myloop:mov al,InputString[bx]
@@ -21,8 +22,8 @@ main proc far
     add bx,1
     dec cx
     jnz myloop
-    mov ah,9
-    mov dx,offset ResultString
-    int 21h
+    mov ax,2304
+    mov dx,offset InputString
+    int 33
     main endp
 end main
